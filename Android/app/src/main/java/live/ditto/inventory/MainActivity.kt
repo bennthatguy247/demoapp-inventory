@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(), DittoManager.ItemUpdateListener {
         }
 
         searchView = findViewById(R.id.searchView)
+
         setupSearch()
 
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
@@ -70,6 +71,7 @@ class MainActivity : AppCompatActivity(), DittoManager.ItemUpdateListener {
     }
 
     private fun setupSearch() {
+        searchView.setQueryHint("You want it, we got It!")
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false // let user keep typing
@@ -81,7 +83,8 @@ class MainActivity : AppCompatActivity(), DittoManager.ItemUpdateListener {
                 } else {
                     fullItemList.filter {
                         it.title.contains(newText, ignoreCase = true) ||
-                                it.detail.contains(newText, ignoreCase = true)
+                        it.detail.contains(newText, ignoreCase = true) ||
+                        it.price.toString().contains(newText, ignoreCase = true)
                     }
                 }
                 itemsAdapter.setFilteredItems(filtered)
