@@ -66,8 +66,12 @@ class MainActivity : AppCompatActivity(), DittoManager.ItemUpdateListener {
 
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
-        itemsAdapter.onPlusClick = { DittoManager.increment(it.itemId) }
-        itemsAdapter.onMinusClick = { DittoManager.decrement(it.itemId) }
+        itemsAdapter.onPlusClick = { it ->
+            DittoManager.increment(it.itemId)
+        }
+        itemsAdapter.onMinusClick = { it ->
+            DittoManager.decrement(it.itemId)
+        }
     }
 
     private fun setupSearch() {
@@ -81,6 +85,7 @@ class MainActivity : AppCompatActivity(), DittoManager.ItemUpdateListener {
                 val filtered = if (newText.isNullOrBlank()) {
                     fullItemList
                 } else {
+
                     fullItemList.filter {
                         it.title.contains(newText, ignoreCase = true) ||
                         it.detail.contains(newText, ignoreCase = true) ||
